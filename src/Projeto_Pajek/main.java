@@ -23,7 +23,7 @@ public class main {
         
         */
         
-        /* ================== gerador de grafo aleatório =============
+         //================== gerador de grafo aleatório =============
         int vertices = 100;
         int arestas = 400;
         
@@ -33,6 +33,7 @@ public class main {
         gerador.criar(vertices, arestas);
         
         G.imprimi_adj();
-             */
+             
+        System.out.println(G.euleriano(G.conectividade()));
     }
 }
