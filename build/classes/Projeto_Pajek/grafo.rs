@@ -1,0 +1,2 @@
+Projeto_Pajek.grafo
+Projeto_Pajek.vertice
