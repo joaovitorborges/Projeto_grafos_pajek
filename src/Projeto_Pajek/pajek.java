@@ -7,7 +7,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class pajek {
     grafo G;
@@ -30,10 +29,15 @@ public class pajek {
         
         G = new grafo(size);
         
+        boolean direcionado = false;
         String[] a;
         int c = 0;
         while ((line = br.readLine()) != null) {
-            if (line.startsWith("*Edges") ) { //se comeca com edges, parar
+            if (line.startsWith("*Arcs")) { //se comeca com edges, parar
+                direcionado = true;
+                break;                
+            }
+            if (line.startsWith("*Edges")) {
                 break;
             }
             if(line.isEmpty()){
@@ -51,13 +55,24 @@ public class pajek {
                         
         }
         
+ 
+        
         while ((line = br.readLine()) != null) {
             if(line.isEmpty()){
                 continue;         //se for linha em branco, ignora
             }
+            if(line.startsWith("*Arcs")){
+                System.out.println("batata");
+                direcionado = true;         //se for direcionado
+            }                
+            
             
             a = line.split(" ");
             G.criar_adj(Integer.parseInt(a[0])-1, Integer.parseInt(a[1])-1, Integer.parseInt(a[2]));
+            
+            if(!direcionado){
+                G.criar_adj(Integer.parseInt(a[1])-1, Integer.parseInt(a[0])-1, Integer.parseInt(a[2]));
+            }
             /*
             System.out.println("inicio:"+a[0]);
             System.out.println("fim:"+a[1]);    
@@ -67,28 +82,63 @@ public class pajek {
         }
             
                 
-        G.imprimi_adj();
+        G.imprime_adj();
     }
     
-    public void Write(File f) throws IOException{
+    public void Write(File f,String S) throws IOException{
         FileWriter writer = new FileWriter(f);
         BufferedWriter bw = new BufferedWriter(writer);
+        //int[][] ligacoes = new int[G.size][2];
+        
+        ArrayList<Integer>[] ligacoes = new ArrayList[2];
+        ligacoes[0] = new ArrayList();
+        ligacoes[1] = new ArrayList();
+        
+        String R;
+        boolean direcionado = false;
+        if (S.equals("direcionado")) {
+            R = "*Arcs";
+            direcionado = true;
+        }
+        else{
+            R = "*Edges";
+        }
+        
         
         bw.write("*Vertices  "+G.size+"\n\n");
         
         for (int i = 0; i < G.size; i++) {
             bw.write(i+1+" \""+G.vertices[i].nome+"\"\n");
         }
-        bw.write("\n\n*Edges\n\n");
+        bw.write("\n\n"+R+"\n\n");
         
         for (int i = 0; i < G.size; i++) {
             ArrayList<ListaSE.No> adj = new ArrayList();
             int c = G.adjacentes2(i, adj);
+            
             for (int j = 0; j < c; j++) {
-                bw.write(i+1+" "+ (adj.get(j).fim+1) + " " + adj.get(j).peso + "\n");
+                
+                if (!direcionado) {
+                    boolean T = true;
+                        for (int k = 0; k < ligacoes[0].size(); k++) {
+                            if ((ligacoes[0].get(k) == i && ligacoes[1].get(k) == adj.get(j).fim) || (ligacoes[1].get(k) == i && ligacoes[0].get(k) == adj.get(j).fim)) {
+                               T = false;
+                                break;
+                            }    
+                        }
+                    
+                    if (T) {
+                        bw.write((i+1)+" "+ (adj.get(j).fim+1) + " " + adj.get(j).peso + "\n");
+                        ligacoes[0].add(i);
+                        ligacoes[1].add(adj.get(j).fim);
+                    }
+                     
+                }
+                else if(direcionado){
+                    bw.write((i+1)+" "+ (adj.get(j).fim+1) + " " + adj.get(j).peso + "\n");
+                }
             }
         }
-                
         bw.close();
         
         

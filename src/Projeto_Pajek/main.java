@@ -1,15 +1,14 @@
 package Projeto_Pajek;
 
+import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Random;
 
 public class main {
 
     public static void main(String[] args) throws IOException {
 
         
-        /* ================== ler e salvar pajek ================
+        /* ================== ler e salvar pajek ================*/
               
         grafo G = null;
         
@@ -19,11 +18,11 @@ public class main {
         File escrever = new File("arquivos/teste1.txt");
         
         P.Load(ler);
-        P.Write(escrever);
+        P.Write(escrever,"direcionado");
         
-        */
         
-         //================== gerador de grafo aleatório =============
+        
+         /*================== gerador de grafo aleatório =============
         int vertices = 100;
         int arestas = 400;
         
@@ -34,6 +33,7 @@ public class main {
         
         G.imprimi_adj();
              
-        System.out.println(G.euleriano(G.conectividade()));
+*/
+        //System.out.println(G.euleriano(G.conectividade()));
     }
 }
