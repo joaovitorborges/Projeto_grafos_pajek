@@ -26,7 +26,7 @@ Requisitos de implementação:
 * ~~(0,5 Ponto) Módulo de gravação de Grafo, ponderado e rotulado em Arquivo (Formato Pajek em anexo);~~  
 * ~~(0,5 Ponto) Módulo de carregamento de Grafo de Arquivo (Formato Pajek em anexo);~~  
 * (0,5 Ponto) Função que verifica se o grafo é conexo ou não;  
-* ~~(0,5 Ponto) Função que verifica se o grafo é Euleriano ou não;  
+* ~~(0,5 Ponto) Função que verifica se o grafo é Euleriano ou não;~~  
 * (1,0 Ponto) Função que verifica se o grafo é Cíclico ou não;  
 * (1,0 Ponto) Função que calcula a Centralidade de Posicionamento de cada nó (considere a distância do melhor caminho);  
 * (1,0 Ponto) Função que calcula a Centralidade de Intermediação de cada nó (considere a distância do melhor caminho);  
