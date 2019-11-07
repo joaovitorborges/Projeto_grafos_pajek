@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 class vertice {
-
     public String nome;
 }
 
@@ -193,5 +192,30 @@ public class grafo {
         }
         return true;
     }
-
+    
+    public boolean ciclico(){
+        ArrayList<Integer> vetor = new <Integer>ArrayList();
+        vetor.add(0);
+        return eciclico(0,vetor);
 }
+    public boolean eciclico(int index,ArrayList<Integer> vetor){
+        int adj[]=new int[vertices.length];
+        int cont = adjacentes(index,adj);
+        for (int i = 0; i < cont; i++) {
+            if (adj[i] == index) {
+                continue;
+            }
+            if (vetor.contains(adj[i])) {
+                return true;
+            }
+            else{
+                vetor.add(adj[i]);
+                if (eciclico(adj[i],vetor)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+}
+    

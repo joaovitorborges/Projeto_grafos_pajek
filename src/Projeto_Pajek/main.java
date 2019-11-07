@@ -7,9 +7,6 @@ import java.util.ArrayList;
 public class main {
 
     public static void main(String[] args) throws IOException {
-        
-      
-        
         /* ================== ler e salvar pajek ================*/
               
         grafo G = null;
@@ -49,5 +46,6 @@ public class main {
         System.out.println(P.G.ContaComponentes());
         
         //System.out.println(G.euleriano(G.conectividade()));
+         System.out.println(G.ciclico());
     }
 }
