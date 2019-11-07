@@ -1,8 +1,6 @@
 package Projeto_Pajek;
 
-import Projeto_Pajek.ListaSE.No;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedList;
 
 class vertice {
@@ -102,52 +100,82 @@ public class grafo {
         return c;
     }
 
-    public Boolean Largura(int s, int d) {
+    public int adjacentesNaoDir(int S, ArrayList<Integer> adj) {
+        int c = 0;
+        ListaSE.No p = m.linhas[S].primeiro;
+        for (int i = 0; i < m.size; i++) {  // adiciona todos os adjacentes de S
 
-        boolean visited[] = new boolean[vertices.length];   // todos os visitados começam como falso
-        LinkedList<Integer> queue = new LinkedList<>(); // para armazenar os já visitados
+            if (p != null) {
+                adj.add(p.fim);
+                p = p.proximo;
+                c++;
+            }
+        }
 
-        visited[s] = true;     // marca o nó atual como visitado e adiciona ele na queue
-        queue.add(s);
-
-        int adj[] = new int[vertices.length];      // usado para armazenar os adjacentes
-
-        while (!queue.isEmpty()) { // repeté até que todos os nós sejam visitados ou se encontre o nó procurado
-            s = queue.poll();  //pega o vertice s da queue
-
-            int n;
-            this.adjacentes(s, adj);  //pegas os adjacentes do vertice já visitado
-
-            for (int j = 0; j < adj.length; j++) {
-                if (adj[j] == -1) {  // ignora -1
+        //adiciona todos que se conectam a S
+        for (int i = 0; i < size; i++) {  // pra cada nó,
+            p = m.linhas[i].primeiro;     // pega sua linha de adjacências
+            for (int j = 0; j < size; j++) {  //para cada adjacência
+                if (p == null) {
                     break;
-                }
-
-                n = adj[j];
-
-                if (n == d) {  // se este nó for o procurado retorna true 
-                    visited[d] = true;
-                    //System.out.print(" [ ");
-                    for (int i = 0; i < visited.length; i++) {
-                        if (visited[i]) {
-                            //System.out.print(vertices[i].nome+ " ");
-                            if (!NosComponenete.contains(Integer.parseInt(vertices[i].nome))) {
-                                NosComponenete.add(Integer.parseInt(vertices[i].nome));
-                            }
-                        }
-                    }
-                    //System.out.println("]");
-                    return true;
-                }
-
-                if (!visited[n]) {  // caso contrario, marca o nó como visitado e o adiciona na queue
-                    visited[n] = true;
-                    queue.add(n);
+                } else if (p.fim == S) {  // se esse nó se liga a S
+                    adj.add(i);
+                    c++;
+                    break; 
+                } else {            // se não
+                    p = p.proximo;
                 }
             }
         }
 
-        return false;
+        return c;
+    }
+
+    public ArrayList<Integer> BuscaComponente(int S, ArrayList<Integer> visitados) {
+        visitados.add(S);    //adiciona atual ao visitados
+        ArrayList<Integer> R = new ArrayList();
+        int x = adjacentesNaoDir(S, R);   // pega os adjacentes do atual
+
+        if (x == 0 && !R.contains(S)) {      //caso o vertice esteja flutuando
+            R.add(S);
+            return R;
+        }
+
+        for (int i = 0; i < x; i++) { // para cada adjacente
+            ArrayList<Integer> B = new ArrayList();
+
+            if (!visitados.contains(R.get(i))) {    // se visitados não contém este adjacente
+                B = BuscaComponente(R.get(i), visitados);   // faz recursão
+            }
+
+            for (int vértice : B) {        // para cada nó do resultado, add em R
+                if (!R.contains(vértice)) {
+                    R.add(vértice);
+                }
+            }
+
+        }
+        return R;
+    }
+
+    public int ContaComponentes() {
+        int C = 0;
+        ArrayList<Integer> visitados = new ArrayList(); // array com todas os vértices
+        for (int i = 0; i < size; i++) {
+            visitados.add(i);
+        }
+
+        while (!visitados.isEmpty()) { //até que esteja vazio
+            // busca um componente
+            ArrayList<Integer> Componente = BuscaComponente(visitados.get(0), new ArrayList());
+            C++;
+            visitados.removeAll(Componente); // remove o componente dos vértices sobrando
+        }
+        return C;
+    }
+    
+    public boolean SerConexo(){
+        return ContaComponentes() == 1;
     }
 
     public boolean euleriano(int quantidade_componentes) {

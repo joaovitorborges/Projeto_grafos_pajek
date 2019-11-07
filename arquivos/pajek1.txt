@@ -1,4 +1,4 @@
-*Vertices  8
+*Vertices  10
 
 
 
@@ -32,9 +32,12 @@
 
 8 "Event 5"
 
+9 "banana"
+
+10 "batata"
 
 
-*Edges  // para não direcionado ou *Arcs para direcionado
+*Arcs // para não direcionado ou *Arcs para direcionado
 
 
 
@@ -50,7 +53,7 @@
 
 
 
-2 5 5 
+2 5 5
 
 
 
@@ -71,3 +74,5 @@
 
 
 3 8 7
+
+9 7 5

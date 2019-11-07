@@ -1,4 +1,4 @@
-*Vertices  8
+*Vertices  10
 
 1 "Actor 1"
 2 "Actor 2"
@@ -8,6 +8,8 @@
 6 "Event 3"
 7 "Event 4"
 8 "Event 5"
+9 "banana"
+10 "batata"
 
 
 *Arcs
@@ -21,12 +23,4 @@
 3 4 11
 3 7 2
 3 8 7
-4 1 10
-4 2 3
-4 3 11
-5 1 4
-5 2 5
-6 2 8
-7 3 2
-8 2 12
-8 3 7
+9 7 5
