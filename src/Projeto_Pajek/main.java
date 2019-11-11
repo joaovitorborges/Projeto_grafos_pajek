@@ -3,12 +3,13 @@ package Projeto_Pajek;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class main {
 
     public static void main(String[] args) throws IOException {
-        /* ================== ler e salvar pajek ================*/
-              
+        /* ================== ler e salvar pajek ================
+
         grafo G = null;
         pajek P = new pajek(G);
         
@@ -17,35 +18,34 @@ public class main {
         
         P.Load(ler);
         P.Write(escrever,"direcionado");
-        
-        
-        
-         /*================== gerador de grafo aleatório =============
-        int vertices = 100;
-        int arestas = 400;
+
+
+
+         /*================== gerador de grafo aleatório ============= */
+        int vertices = 10000;
+        int arestas = 50000;
         
         grafo G = new grafo(vertices); 
         
         Gerador gerador = new Gerador(G);
         gerador.criar(vertices, arestas);
         
-        G.imprimi_adj();
-             
-*/
+        G.imprime_adj();
+
+
          
          /*================== busca de componentes com largura ================*/
-        ArrayList<Integer> adj = new ArrayList();
-        int x = P.G.adjacentesNaoDir(1, adj);
-        System.out.println("adjacentes: " + adj);
-        System.out.println("Qnt. de adjacentes: "+x);
-        System.out.println("");
+
                 
-        //ArrayList<Integer> R = P.G.BuscaComponente(0,new ArrayList());
+        //LinkedList R = P.G.BuscaComponente(9,new LinkedList());
         //System.out.println(R);
-        
-        System.out.println(P.G.ContaComponentes());
-        
+        //LinkedList<Integer> R2 = P.G.BuscaComponente2(9);
+       // System.out.println(R2);
+
+
+        System.out.println(G.ContaComponentes());
+        //System.out.println(P.G.ciclico());
         //System.out.println(G.euleriano(G.conectividade()));
-         System.out.println(G.ciclico());
+        //
     }
 }

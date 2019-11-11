@@ -99,11 +99,10 @@ public class grafo {
         return c;
     }
 
-    public int adjacentesNaoDir(int S, ArrayList<Integer> adj) {
+    public int adjacentesNaoDir(int S, LinkedList<Integer> adj) {
         int c = 0;
         ListaSE.No p = m.linhas[S].primeiro;
         for (int i = 0; i < m.size; i++) {  // adiciona todos os adjacentes de S
-
             if (p != null) {
                 adj.add(p.fim);
                 p = p.proximo;
@@ -130,9 +129,9 @@ public class grafo {
         return c;
     }
 
-    public ArrayList<Integer> BuscaComponente(int S, ArrayList<Integer> visitados) {
+    public LinkedList<Integer> BuscaComponente(int S, LinkedList<Integer> visitados) {
         visitados.add(S);    //adiciona atual ao visitados
-        ArrayList<Integer> R = new ArrayList();
+        LinkedList<Integer> R = new LinkedList();
         int x = adjacentesNaoDir(S, R);   // pega os adjacentes do atual
 
         if (x == 0 && !R.contains(S)) {      //caso o vertice esteja flutuando
@@ -141,7 +140,7 @@ public class grafo {
         }
 
         for (int i = 0; i < x; i++) { // para cada adjacente
-            ArrayList<Integer> B = new ArrayList();
+            LinkedList<Integer> B = new LinkedList();
 
             if (!visitados.contains(R.get(i))) {    // se visitados não contém este adjacente
                 B = BuscaComponente(R.get(i), visitados);   // faz recursão
@@ -157,17 +156,47 @@ public class grafo {
         return R;
     }
 
+    public LinkedList<Integer> BuscaComponente2(int S){
+        LinkedList<Integer> visitados = new LinkedList();
+        visitados.add(S);
+        LinkedList<Integer> R = new LinkedList();
+        int x = adjacentesNaoDir(S, R);   // pega os adjacentes do atual
+        R.add(S);
+        int c = 0;
+
+        while(true){
+            if (visitados.size() == R.size() || c == size){
+                break;
+            }
+            LinkedList<Integer> A = new LinkedList();
+            if (!visitados.contains(R.get(c))) {
+                adjacentesNaoDir(R.get(c), A);
+                visitados.add(R.get(c));
+            for ( int i = 0; i<A.size();i++){
+                if (!visitados.contains(A.get(i))) {
+                    R.add(A.get(i));
+                }
+            }
+            }
+            c++;
+        }
+
+        return R;
+
+    }
+
     public int ContaComponentes() {
         int C = 0;
-        ArrayList<Integer> visitados = new ArrayList(); // array com todas os vértices
+        LinkedList<Integer> visitados = new LinkedList(); // array com todas os vértices
         for (int i = 0; i < size; i++) {
             visitados.add(i);
         }
 
         while (!visitados.isEmpty()) { //até que esteja vazio
             // busca um componente
-            ArrayList<Integer> Componente = BuscaComponente(visitados.get(0), new ArrayList());
+            LinkedList<Integer> Componente = BuscaComponente2(visitados.get(0));
             C++;
+            System.out.println("Componente "+ C+ ":" + Componente);
             visitados.removeAll(Componente); // remove o componente dos vértices sobrando
         }
         return C;
@@ -198,6 +227,7 @@ public class grafo {
         vetor.add(0);
         return eciclico(0,vetor);
 }
+
     public boolean eciclico(int index,ArrayList<Integer> vetor){
         int adj[]=new int[vertices.length];
         int cont = adjacentes(index,adj);
@@ -217,5 +247,12 @@ public class grafo {
         }
         return false;
     }
+
+
+
+
 }
+
+
+
     
