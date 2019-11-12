@@ -11,14 +11,19 @@ public class Gerador {
         this.G = G;
     }
 
-    public void criar(int vertices, int arestas) {
+    public void criar(int vertices, int arestas, String str) {
+
+        boolean serconexo = false;
+
+        if (str.equals("conexo")){
+            serconexo = true;
+        }
 
         Random gerador = new Random();
 
         int adj[] = new int[vertices];
         for (int i = 0; i < vertices; i++) {
             G.seta_inform(i, Integer.toString(i));
-            System.out.println(i);
         }
 
         int cont = 0;
@@ -56,6 +61,18 @@ public class Gerador {
 
             }
 
+        }
+
+
+        ArrayList<Integer> x = G.ContaComponentes();
+        System.out.println(x);
+        if (x.size()>1 && serconexo){
+            for (int i = 0;i<x.size()-1;i++){
+                G.criar_adj(x.get(i),x.get(i+1),gerador.nextInt(vertices));
+            }
+
+            System.out.println("corrigido!");
+            G.ContaComponentes();
         }
 
     }

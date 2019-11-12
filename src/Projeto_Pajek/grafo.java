@@ -2,6 +2,7 @@ package Projeto_Pajek;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Random;
 
 class vertice {
     public String nome;
@@ -129,7 +130,7 @@ public class grafo {
         return c;
     }
 
-    public LinkedList<Integer> BuscaComponente(int S, LinkedList<Integer> visitados) {
+    public LinkedList<Integer> BuscaComponenteRecursivo(int S, LinkedList<Integer> visitados) {
         visitados.add(S);    //adiciona atual ao visitados
         LinkedList<Integer> R = new LinkedList();
         int x = adjacentesNaoDir(S, R);   // pega os adjacentes do atual
@@ -143,7 +144,7 @@ public class grafo {
             LinkedList<Integer> B = new LinkedList();
 
             if (!visitados.contains(R.get(i))) {    // se visitados não contém este adjacente
-                B = BuscaComponente(R.get(i), visitados);   // faz recursão
+                B = BuscaComponenteRecursivo(R.get(i), visitados);   // faz recursão
             }
 
             for (int vértice : B) {        // para cada nó do resultado, add em R
@@ -161,32 +162,30 @@ public class grafo {
         visitados.add(S);
         LinkedList<Integer> R = new LinkedList();
         int x = adjacentesNaoDir(S, R);   // pega os adjacentes do atual
-        R.add(S);
-        int c = 0;
 
-        while(true){
-            if (visitados.size() == R.size() || c == size){
-                break;
-            }
+        while(!R.isEmpty()){
             LinkedList<Integer> A = new LinkedList();
-            if (!visitados.contains(R.get(c))) {
-                adjacentesNaoDir(R.get(c), A);
-                visitados.add(R.get(c));
-            for ( int i = 0; i<A.size();i++){
-                if (!visitados.contains(A.get(i))) {
-                    R.add(A.get(i));
+            if (!visitados.contains(R.get(0))) {
+                adjacentesNaoDir(R.get(0), A);
+                visitados.add(R.get(0));
+
+                for ( int i = 0; i<A.size();i++){
+                    if (!visitados.contains(A.get(i))) {
+                        R.add(A.get(i));
+                    }
                 }
             }
-            }
-            c++;
+            R.remove(R.get(0));
         }
 
-        return R;
+        return visitados;
 
     }
 
-    public int ContaComponentes() {
+    public ArrayList<Integer> ContaComponentes() {
+        Random Rand = new Random();
         int C = 0;
+        ArrayList<Integer> R = new ArrayList();
         LinkedList<Integer> visitados = new LinkedList(); // array com todas os vértices
         for (int i = 0; i < size; i++) {
             visitados.add(i);
@@ -197,13 +196,14 @@ public class grafo {
             LinkedList<Integer> Componente = BuscaComponente2(visitados.get(0));
             C++;
             System.out.println("Componente "+ C+ ":" + Componente);
+            R.add(Componente.get(Rand.nextInt(Componente.size())));
             visitados.removeAll(Componente); // remove o componente dos vértices sobrando
         }
-        return C;
+        return R;
     }
     
     public boolean SerConexo(){
-        return ContaComponentes() == 1;
+        return ContaComponentes().size() == 1;
     }
 
     public boolean euleriano(int quantidade_componentes) {
