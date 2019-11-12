@@ -21,11 +21,11 @@ public class main {
         P.Write(escrever,"direcionado");
 
          ArrayList<Integer> x = P.G.ContaComponentes();
-*/
+
+        */
 
 
-
-         /*================== gerador de grafo aleatório ============= */
+         /*================== gerador de grafo aleatório =============
         int vertices = 7000;
         int arestas = 25000;
         
@@ -36,20 +36,29 @@ public class main {
         
         //G.imprime_adj();
 
-
+        */
 
          
-         /*================== busca de componentes com largura ================*/
+         /*================== busca de componentes com largura ================
 
-        //LinkedList R = P.G.BuscaComponente(9,new LinkedList());
+        //LinkedList<Integer> R = P.G.BuscaComponente2(9);
         //System.out.println(R);
-        //LinkedList<Integer> R2 = P.G.BuscaComponente2(9);
-       // System.out.println(R2);
-
 
         //System.out.println(G.ContaComponentes());
+
         //System.out.println(P.G.ciclico());
         //System.out.println(G.euleriano(G.conectividade()));
-        //
+
+        */
+
+
+         /* ============leitor da base ==================== */
+
+        grafo G = null;
+        File ler = new File("C:\\Users\\joaov\\OneDrive\\Área de Trabalho\\Projeto_Pajek\\arquivos\\soc-sign-bitcoinotc.txt");
+
+        Leitor L = new Leitor(G,6006);
+        L.Load(ler);
+
     }
 }
