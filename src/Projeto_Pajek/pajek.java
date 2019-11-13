@@ -44,7 +44,7 @@ public class pajek {
             if(line.isEmpty()){
                 continue;         //se for linha em branco, ignora
             }
-            line = line.replace("\"", "");System.out.println(line);
+            line = line.replace("\"", "");
             a = line.split(" ",2);           //divide a linha entre o numero do nó e o nome dele
             G.seta_inform(c, a[1]);
             c++;

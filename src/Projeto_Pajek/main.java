@@ -16,14 +16,14 @@ public class main {
         pajek P = new pajek(G);
         
         File ler = new File("C:\\Users\\joaov\\OneDrive\\Área de Trabalho\\Projeto_Pajek\\arquivos\\pajek2.txt");
-        File escrever = new File("arquivos/teste1.txt");
+        //File escrever = new File("arquivos/teste1.txt");
         
         P.Load(ler);
+
+        P.G.Centralidade_Intermediacao();
         //P.Write(escrever,"direcionado");
 
-        // ArrayList<Integer> x = P.G.ContaComponentes();
 
-        System.out.println(Arrays.toString(P.G.Centralidade_Posicionamento()));
 
 
          /*================== gerador de grafo aleatório =============

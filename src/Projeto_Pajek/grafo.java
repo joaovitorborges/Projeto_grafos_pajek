@@ -4,9 +4,8 @@ import java.util.*;
 
 class vertice {
     public String nome;
-    public int avaliacoes = 0;
-    public int qnt_avaliacoes = 0;
-
+    public float cent_posicionamento;
+    public float cent_intermediacao;
 }
 
 //-------------------------------------------
@@ -79,21 +78,23 @@ public class grafo {
         return distancia[t];
     }
 
-    public void imprimeCaminho(int s, int t){
+    public ArrayList<Integer> imprimeCaminho(int s, int t){
         Deque<String> stack = new ArrayDeque<String>();
+        ArrayList<Integer> R = new ArrayList();
         int i = caminho[t];
         stack.push(vertices[t].nome);
-        while(i != s){
+        if (i!=-1) {
+            while (i != s) {
+                stack.push(vertices[i].nome);
+                i = caminho[i];
+            }
             stack.push(vertices[i].nome);
-            i = caminho[i];
+            int tam = stack.size();
+            for (int j = 0; j < tam; j++) {
+                R.add(Integer.parseInt(stack.pop()));
+            }
         }
-        stack.push(vertices[i].nome);
-        int tam = stack.size();
-        for (int j = 0; j < tam; j++) {
-            System.out.print(stack.pop()+" ");
-        }
-        System.out.println("");
-
+        return R;
     }
 
     public void criar_adj(int i, int j, int tam) {
@@ -306,13 +307,6 @@ public class grafo {
         return false;
     }
 
-    public int Nota_Vertice(int i){
-        if (vertices[i].qnt_avaliacoes==0){
-            return 0;
-        }
-        return vertices[i].avaliacoes/vertices[i].qnt_avaliacoes;
-    }
-
     public float Agrupamento_local(int x){
         ArrayList<ListaSE.No> adj = new ArrayList();
         ArrayList<Integer> visitados = new ArrayList();
@@ -351,12 +345,11 @@ public class grafo {
         return (1*S/size);
     }
 
-    public float[] Centralidade_Posicionamento(){
+    public void Centralidade_Posicionamento(){
         float[] pesos = new float[size];
         for (int i = 0; i < size; i++) {
             pesos[i] = 0;
         }
-
 
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
@@ -365,10 +358,49 @@ public class grafo {
         }
 
         for (int k = 0; k < size; k++) {
-            pesos[k] = 1/pesos[k];
+            vertices[k].cent_posicionamento = 1/pesos[k];
         }
-        return pesos;
     }
+
+    public void Centralidade_Intermediacao(){
+        float[] pesos = new float[size];
+        for (int i = 0; i < size; i++) {
+            pesos[i] = 0;
+        }
+
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                dijkstra(i,j);
+                ArrayList<Integer> R = imprimeCaminho(i,j);
+
+                if (R.size()!=0) {
+                    R.remove(0);
+                    R.remove(R.size() - 1);
+                }
+                //System.out.println("Caminho entre "+i+" e "+j+":" + R);
+                for (int k = 0; k < R.size(); k++) {
+                    pesos[R.get(k)]++;
+                }
+            }
+        }
+
+        for (int k = 0; k < size; k++) {
+
+            if (direcionado) {
+                vertices[k].cent_intermediacao = pesos[k]/((size-1)*(size-2));
+                //System.out.println(vertices[k].cent_intermediacao);
+            }
+            else{
+                vertices[k].cent_intermediacao = 2*(pesos[k]/((size-1)*(size-2)));
+                //System.out.println(vertices[k].cent_intermediacao);
+
+            }
+
+
+        }
+
+    }
+
 
 
 }
