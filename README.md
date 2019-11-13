@@ -28,12 +28,12 @@ Requisitos de implementação:
 * ~~(0,5 Ponto) Função que verifica se o grafo é conexo ou não;~~  
 * ~~(0,5 Ponto) Função que verifica se o grafo é Euleriano ou não;~~  
 * ~~(1,0 Ponto) Função que verifica se o grafo é Cíclico ou não;~~  
-* (~~1,0 Ponto) Função que calcula a Centralidade de Posicionamento de cada nó (considere a distância do melhor caminho);~~  
-* (1,0 Ponto) Função que calcula a Centralidade de Intermediação de cada nó (considere a distância do melhor caminho);  
+* ~~(1,0 Ponto) Função que calcula a Centralidade de Posicionamento de cada nó (considere a distância do melhor caminho);~~  
+* ~~(1,0 Ponto) Função que calcula a Centralidade de Intermediação de cada nó (considere a distância do melhor caminho);~~  
 * ~~(1,0 Ponto) Gerador de grafo aleatório que recebe as seguintes entradas:~~  
   ~~N. de nós;~~
   ~~N. de arestas;~~
-~~Se conexo ou não;~~
+~ ~~Se conexo ou não;~~
 
 * (4,0 pontos) Modelar um problema com grafo à sua escolha com as seguintes características:
 Mínimo de 5.000 (cinco mil nós)
