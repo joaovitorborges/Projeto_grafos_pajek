@@ -1,11 +1,12 @@
 package Projeto_Pajek;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Random;
+import java.util.*;
 
 class vertice {
     public String nome;
+    public int avaliacoes = 0;
+    public int qnt_avaliacoes = 0;
+
 }
 
 //-------------------------------------------
@@ -21,6 +22,7 @@ public class grafo {
     private static final boolean NAOMEMBRO = false;
     private static final int INFINITO = 999999999;
     int caminho[];
+    public boolean direcionado = false;
 
     public grafo(int size) {
         this.size = size;
@@ -36,6 +38,62 @@ public class grafo {
                 warshall[i][j] = false;
             }
         }
+    }
+
+    public int dijkstra(int s, int t){
+
+        int distancia[] = new int[size];
+        boolean perm[]  = new boolean[size];
+        int corrente, i, k=s, dc;
+        int menordist, novadist;
+
+        for(i=0; i < size; ++i){
+            perm[i] = NAOMEMBRO;
+            distancia[i] = INFINITO;
+            caminho[i] = -1;
+        }
+
+        perm[s] = MEMBRO;
+        distancia[s] = 0;
+        corrente = s;
+
+        while(corrente != t){
+            menordist = INFINITO;
+            dc = distancia[corrente];
+            for(i = 0; i < size; i++){
+                if(!perm[i]){
+                    novadist = dc + m.valor(corrente,i);
+                    if(novadist < distancia[i]){
+                        distancia[i] = novadist;
+                        caminho[i] = corrente;
+                    }
+                    if(distancia[i] < menordist){
+                        menordist = distancia[i];
+                        k = i;
+                    }
+                }
+            }
+            corrente = k;
+            perm[corrente] = MEMBRO;
+        }
+        return distancia[t];
+    }
+
+    public void imprimeCaminho(int s, int t){
+        Deque<String> stack = new ArrayDeque<String>();
+        int i = caminho[t];
+        stack.push(vertices[t].nome);
+        while(i != s){
+            stack.push(vertices[i].nome);
+            i = caminho[i];
+        }
+        stack.push(vertices[i].nome);
+        int tam = stack.size();
+        for (int j = 0; j < tam; j++) {
+            System.out.print(stack.pop()+" ");
+        }
+        System.out.println("");
+
     }
 
     public void criar_adj(int i, int j, int tam) {
@@ -248,7 +306,69 @@ public class grafo {
         return false;
     }
 
+    public int Nota_Vertice(int i){
+        if (vertices[i].qnt_avaliacoes==0){
+            return 0;
+        }
+        return vertices[i].avaliacoes/vertices[i].qnt_avaliacoes;
+    }
 
+    public float Agrupamento_local(int x){
+        ArrayList<ListaSE.No> adj = new ArrayList();
+        ArrayList<Integer> visitados = new ArrayList();
+
+        int qnt_adj = adjacentes2(x,adj);
+        float arestas = 0;
+        for (ListaSE.No X : adj){                         // para cada adjacente z de b
+            visitados.add(X.fim);
+            ArrayList<ListaSE.No> adj2 = new ArrayList();
+            int qnt_adj2 = adjacentes2(X.fim,adj2);     // pega os adjacentes de z
+
+            for (ListaSE.No Y : adj2){
+                for (ListaSE.No Z : adj){
+                    if (Z.fim == Y.fim && !visitados.contains(Z.fim)){
+                        arestas++;
+                    }
+                }
+            }
+        }
+        int var = qnt_adj-1;
+        float R = arestas/(qnt_adj*(var));
+        if (var != 0) {
+            if (direcionado) {
+                return R;
+            }
+            return 2 * R;
+        }
+        return 0;
+    }
+
+    public float Agrupamento_Medio(){
+        float S = 0;
+        for (int x = 0; x < this.size;x++){
+            S +=Agrupamento_local(x);
+        }
+        return (1*S/size);
+    }
+
+    public float[] Centralidade_Posicionamento(){
+        float[] pesos = new float[size];
+        for (int i = 0; i < size; i++) {
+            pesos[i] = 0;
+        }
+
+
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                pesos[i]+=dijkstra(i,j);
+            }
+        }
+
+        for (int k = 0; k < size; k++) {
+            pesos[k] = 1/pesos[k];
+        }
+        return pesos;
+    }
 
 
 }

@@ -35,6 +35,7 @@ public class pajek {
         while ((line = br.readLine()) != null) {
             if (line.startsWith("*Arcs")) { //se comeca com edges, parar
                 direcionado = true;
+                G.direcionado = true;
                 break;                
             }
             if (line.startsWith("*Edges")) {

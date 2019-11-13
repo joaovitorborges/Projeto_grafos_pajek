@@ -3,26 +3,27 @@ package Projeto_Pajek;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Random;
 
 public class main {
 
     public static void main(String[] args) throws IOException {
-        /* ================== ler e salvar pajek ================
+        /* ================== ler e salvar pajek ================     */
 
         grafo G = null;
         pajek P = new pajek(G);
         
-        File ler = new File("C:\\Users\\joaov\\OneDrive\\Área de Trabalho\\Projeto_Pajek\\arquivos\\pajek1.txt");
+        File ler = new File("C:\\Users\\joaov\\OneDrive\\Área de Trabalho\\Projeto_Pajek\\arquivos\\pajek2.txt");
         File escrever = new File("arquivos/teste1.txt");
         
         P.Load(ler);
-        P.Write(escrever,"direcionado");
+        //P.Write(escrever,"direcionado");
 
-         ArrayList<Integer> x = P.G.ContaComponentes();
+        // ArrayList<Integer> x = P.G.ContaComponentes();
 
-        */
+        System.out.println(Arrays.toString(P.G.Centralidade_Posicionamento()));
 
 
          /*================== gerador de grafo aleatório =============
@@ -52,13 +53,18 @@ public class main {
         */
 
 
-         /* ============leitor da base ==================== */
+         /* ================leitor da base ====================
 
         grafo G = null;
+        // link para download da base : https://snap.stanford.edu/data/soc-sign-bitcoin-otc.html
         File ler = new File("C:\\Users\\joaov\\OneDrive\\Área de Trabalho\\Projeto_Pajek\\arquivos\\soc-sign-bitcoinotc.txt");
 
         Leitor L = new Leitor(G,6006);
         L.Load(ler);
 
+        System.out.println("");
+
+        L.G.porcentagem();
+*/
     }
 }

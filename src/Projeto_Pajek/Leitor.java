@@ -38,11 +38,14 @@ public class Leitor {
             }
             G.criar_adj(Integer.parseInt(a[0])-1, Integer.parseInt(a[1])-1, Integer.parseInt(a[2]));
             adjacencias++;
+            G.vertices[Integer.parseInt(a[1])-1].avaliacoes+= Integer.parseInt(a[2]);
+            G.vertices[Integer.parseInt(a[1])-1].qnt_avaliacoes++;
         }
 
         G.imprime_adj();
         System.out.println("Maior nó:"+maior);
         System.out.println("adjacencias:"+adjacencias);
+
     }
 
 }

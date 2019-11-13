@@ -18,7 +18,9 @@ public class MEsparsa {
     
     public int valor(int i, int j){
         ListaSE.No p = this.linhas[i].primeiro;
-        
+        if (p == null){
+            return 99999;
+        }
         while(p.fim != j){
             if (p.proximo==null) {
                 return 9999999;
