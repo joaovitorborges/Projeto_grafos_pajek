@@ -40,4 +40,21 @@ Mínimo de 5.000 (cinco mil nós)
 Mínimo de 20.000 (vinte mil) arestas  
 
 A implementação das questões anteriores deve suportar a aplicação que você escolheu.  
-O problema deve ser modelado pela equipe e cópias de grafos ou códigos, mesmo que parciais, prontas da Internet ou outras fontes acarretará nota 0 a todas as equipes envolvidas.
+O problema deve ser modelado pela equipe e cópias de grafos ou códigos, mesmo que parciais, prontas da Internet ou outras fontes acarretará nota 0 a todas as equipes envolvidas.  
+
+BASE DE DADOS
+
+Foi selecionado um subconjunto da base de dados de todos os comentarios do site Reddit no mês de maio de 2015. segue link:  
+https://www.kaggle.com/reddit/reddit-comments-may-2015  
+
+o significado de cada coluna desta base está documentado em:
+https://github.com/reddit-archive/reddit/wiki/JSON  
+
+apenas algumas colunas foram selecionadas para extração, sendo elas:
+* ups
+* name
+* subreddit
+* id
+* author
+* parent_id
+
