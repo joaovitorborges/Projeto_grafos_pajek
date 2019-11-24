@@ -35,9 +35,9 @@ Requisitos de implementação:
   ~~N. de arestas;~~
   ~~Se conexo ou não;~~
 
-* (4,0 pontos) Modelar um problema com grafo à sua escolha com as seguintes características:
-Mínimo de 5.000 (cinco mil nós)
-Mínimo de 20.000 (vinte mil) arestas  
+* ~~(4,0 pontos) Modelar um problema com grafo à sua escolha com as seguintes características:~~
+~~Mínimo de 5.000 (cinco mil nós)
+Mínimo de 20.000 (vinte mil) arestas  ~~
 
 A implementação das questões anteriores deve suportar a aplicação que você escolheu.  
 O problema deve ser modelado pela equipe e cópias de grafos ou códigos, mesmo que parciais, prontas da Internet ou outras fontes acarretará nota 0 a todas as equipes envolvidas.  
@@ -50,11 +50,9 @@ https://www.kaggle.com/reddit/reddit-comments-may-2015
 o significado de cada coluna desta base está documentado em:
 https://github.com/reddit-archive/reddit/wiki/JSON  
 
-apenas algumas colunas foram selecionadas para extração, sendo elas:
-* ups
-* name
-* subreddit
+Foi extraído da base os comentarios do subreddit "programming", e apenas algumas colunas foram selecionadas para extração, sendo elas:
 * id
+* name
 * author
 * parent_id
-
+* ups
