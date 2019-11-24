@@ -114,7 +114,7 @@ public class grafo {
             stack.push(vertices[i].nome);
             int tam = stack.size();
             for (int j = 0; j < tam; j++) {
-                R.add(Integer.parseInt(stack.pop()));
+                R.add(Integer.parseInt(stack.pop())-1);
             }
         }
         return R;
@@ -406,7 +406,7 @@ public class grafo {
                 }
             }
         }
-
+        //System.out.println(Arrays.toString(pesos));
         for (int k = 0; k < size; k++) {
 
             if (direcionado) {

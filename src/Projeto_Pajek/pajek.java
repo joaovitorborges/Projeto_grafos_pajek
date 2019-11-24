@@ -23,10 +23,10 @@ public class pajek {
         
         String line = br.readLine();
                     
-        if(line.startsWith("*Vertices  ")){
+        if(line.startsWith("*Vertices ")){
             size = Integer.parseInt(line.substring(11));    //pega o tamanho do grafo
-        }           
-        
+        }
+
         G = new grafo(size);
         
         boolean direcionado = false;
