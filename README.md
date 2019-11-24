@@ -55,4 +55,8 @@ Foi extraído da base os comentarios do subreddit "programming", e apenas alguma
 * name
 * author
 * parent_id
-* ups
+* ups  
+
+O grafo é contruído partindo do ponto de que cada usuário faz comentários, sendo eles a um post ou uma resposta a outro comentário. Caso seja uma resposta, é criada uma aresta entre o usuário que escreveu a resposta, e o usuário que escreveu o comentário respondido.
+
+O problema a ser resolvido é o cálculo dos pontos de cada usuário, com base na pontuação acumulada de cada um de seus comentários.
