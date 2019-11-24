@@ -10,7 +10,7 @@ import java.util.Random;
 public class main {
 
     public static void main(String[] args) throws IOException {
-        /* ================== ler e salvar pajek ================     */
+        /* ================== ler e salvar pajek ================
 
         grafo G = null;
         pajek P = new pajek(G);
@@ -23,7 +23,7 @@ public class main {
         P.G.Centralidade_Intermediacao();
         //P.Write(escrever,"direcionado");
 
-
+*/
 
 
          /*================== gerador de grafo aleatório =============
@@ -53,18 +53,20 @@ public class main {
         */
 
 
-         /* ================leitor da base ====================
+         /* ================leitor da base ====================  */
 
         grafo G = null;
-        // link para download da base : https://snap.stanford.edu/data/soc-sign-bitcoin-otc.html
-        File ler = new File("C:\\Users\\joaov\\OneDrive\\Área de Trabalho\\Projeto_Pajek\\arquivos\\soc-sign-bitcoinotc.txt");
 
-        Leitor L = new Leitor(G,6006);
+        File ler = new File("D:\\base reddit\\comentarios programming.csv");
+
+        Leitor L = new Leitor(G,11506);
         L.Load(ler);
 
         System.out.println("");
 
-        L.G.porcentagem();
-*/
+
+
+
+
     }
 }

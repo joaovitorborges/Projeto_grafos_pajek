@@ -6,6 +6,9 @@ class vertice {
     public String nome;
     public float cent_posicionamento;
     public float cent_intermediacao;
+    public ArrayList<String> comments = new ArrayList();
+    public ArrayList<String> parents = new ArrayList();
+    public int pontos;
 }
 
 //-------------------------------------------
@@ -30,6 +33,7 @@ public class grafo {
         warshall = new boolean[size][size];
         caminho = new int[size];
 
+
         for (int i = 0; i < size; i++) {
             vertices[i] = new vertice();
             caminho[i] = -1;
@@ -37,6 +41,25 @@ public class grafo {
                 warshall[i][j] = false;
             }
         }
+
+    }
+
+    public int busca_no(String s){
+        int c = 0;
+
+        while(c<size){
+            if (vertices[c].nome.equals(s)){
+                return c;
+            }
+            c++;
+        }
+        return -1;
+    }
+
+    public boolean ser_ligado(int a, int b){
+        ArrayList<ListaSE.No> adj = new ArrayList();
+        adjacentes2(a,adj);
+        return adj.contains(b);
     }
 
     public int dijkstra(int s, int t){
@@ -342,7 +365,7 @@ public class grafo {
         for (int x = 0; x < this.size;x++){
             S +=Agrupamento_local(x);
         }
-        return (1*S/size);
+        return (S/size);
     }
 
     public void Centralidade_Posicionamento(){
