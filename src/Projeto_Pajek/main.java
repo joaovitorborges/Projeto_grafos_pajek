@@ -57,7 +57,7 @@ public class main {
 
         grafo G = null;
 
-        File ler = new File("D:\\base reddit\\comentarios programming.csv");
+        File ler = new File("arquivos\\comentarios programming.csv");
 
         Leitor L = new Leitor(G,11506);
         L.Load(ler);
