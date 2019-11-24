@@ -15,12 +15,15 @@ public class main {
         grafo G = null;
         pajek P = new pajek(G);
         
-        File ler = new File("C:\\Users\\joaov\\OneDrive\\Área de Trabalho\\Projeto_Pajek\\arquivos\\pajek2.txt");
+        File ler = new File("arquivos\\pajek2.txt");
+        File ler_base = new File("arquivos/comentarios pajek.txt");
         //File escrever = new File("arquivos/teste1.txt");
         
         P.Load(ler);
+        System.out.println("nome:"+P.G.vertices[0].nome);
+        System.out.println("pontos:"+P.G.vertices[0].pontos);
 
-        P.G.Centralidade_Intermediacao();
+        //P.G.Centralidade_Intermediacao();
         //P.Write(escrever,"direcionado");
 
 */
@@ -56,17 +59,15 @@ public class main {
          /* ================leitor da base ====================  */
 
         grafo G = null;
-
         File ler = new File("arquivos\\comentarios programming.csv");
 
         Leitor L = new Leitor(G,11506);
         L.Load(ler);
 
-        System.out.println("");
+        pajek P = new pajek(L.G);
 
-
-
-
+        File escrever = new File("arquivos/comentarios pajek.txt");
+        P.Write(escrever,"direcionado");
 
     }
 }

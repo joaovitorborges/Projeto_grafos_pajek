@@ -59,30 +59,19 @@ public class Leitor {
             for (int j = 0; j < parents.size(); j++) {      //para cada comment que este usuário respondeu
                 for (int k = 0; k < size; k++) {                   // confere quem criou este comentario, e cria a adjacência ente i e k
                     if (G.vertices[k].comments.contains(parents.get(j))){
-                        if (!G.ser_ligado(i,k)) {
-                            G.criar_adj(i, k, 1);
-                        }
-                        else{
-                            ListaSE.No x = G.m.linhas[j].primeiro;
-                            while(x.fim != k){
-                                x = x.proximo;
-                            }
-                            x.peso++;
-                            System.out.println("peso:"+x.peso);
-                        }
+                        G.criar_adj(i, k, 1);
                         adj++;
                     }
                 }
             }
         }
 
-
-
-
-        G.imprime_adj();
+        //G.imprime_adj();
         System.out.println("Nós:"+users.size());
         System.out.println("arestas:"+adj);
-        //System.out.println(G.vertices[5420].nome);
+        System.out.println("nome:"+G.vertices[0].nome);
+        System.out.println("pontos:"+G.vertices[0].pontos);
+
 
     }
 

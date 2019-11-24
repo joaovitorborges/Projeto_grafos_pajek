@@ -45,8 +45,13 @@ public class pajek {
                 continue;         //se for linha em branco, ignora
             }
             line = line.replace("\"", "");
-            a = line.split(" ",2);           //divide a linha entre o numero do nó e o nome dele
+            a = line.split(" ",3);           //divide a linha entre o numero do nó e o nome dele
             G.seta_inform(c, a[1]);
+
+            if (a.length>2){
+                G.vertices[c].pontos=Integer.parseInt(a[2]);
+            }
+
             c++;
             /*
             System.out.println("nó n:"+a[0]);
@@ -109,7 +114,9 @@ public class pajek {
         bw.write("*Vertices  "+G.size+"\n\n");
         
         for (int i = 0; i < G.size; i++) {
-            bw.write(i+1+" \""+G.vertices[i].nome+"\"\n");
+           // if (G.vertices[i].pontos!= null) {
+                bw.write(i + 1 + " \"" + G.vertices[i].nome + "\" " + G.vertices[i].pontos + "\n");
+            //}
         }
         bw.write("\n\n"+R+"\n\n");
         
