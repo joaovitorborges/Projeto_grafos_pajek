@@ -5,7 +5,7 @@ Título do Trabalho:
 Definição e Construção de uma Aplicação de Grafos de Alta Dimensionalidade
 
 
-Características do Trabalho:
+### Características do Trabalho:
 * Valor: 100% da nota do RA4 para a disciplina de Resolução de Problemas com Grafos;
 * Equipe: Máximo em duplas;
 * Linguagem: JAVA ou Python e
@@ -13,15 +13,14 @@ Características do Trabalho:
 
 
  
-Requisitos de entrega:
+### Requisitos de entrega:
 * Entregar código-fonte em arquivo;
 * Entregar código-fonte impresso; e
 * Realizar teste de autoria.
 
 
 
-Requisitos de implementação:
-
+### Requisitos de implementação:
 
 * ~~(0,5 Ponto) Módulo de gravação de Grafo, ponderado e rotulado em Arquivo (Formato Pajek em anexo);~~  
 * ~~(0,5 Ponto) Módulo de carregamento de Grafo de Arquivo (Formato Pajek em anexo);~~  
@@ -42,7 +41,7 @@ Mínimo de 20.000 (vinte mil) arestas~~
 A implementação das questões anteriores deve suportar a aplicação que você escolheu.  
 O problema deve ser modelado pela equipe e cópias de grafos ou códigos, mesmo que parciais, prontas da Internet ou outras fontes acarretará nota 0 a todas as equipes envolvidas.  
 
-BASE DE DADOS
+### Base de dados
 
 Foi selecionado um subconjunto da base de dados de todos os comentarios do site Reddit no mês de maio de 2015. segue link:  
 https://www.kaggle.com/reddit/reddit-comments-may-2015  
